@@ -311,20 +311,23 @@ module.exports = React.createClass({
    * @param  {number} index offset index
    */
   scrollTo(index) {
-    if (this.state.isScrolling || this.state.total < 2) return
-    let state = this.state
-    let diff = (this.props.loop ? 1 : 0) + index + this.state.index
-    let x = 0
-    let y = 0
-    if(state.dir == 'x') x = diff * state.width
-    if(state.dir == 'y') y = diff * state.height
-    this.refs.scrollView && this.refs.scrollView.scrollTo(y, x)
+    if (this.state.isScrolling || this.state.total < 2) return;
+    var state = this.state;
+    //var diff = (this.props.loop ? 1 : 0) + index + this.state.index;
+    var diff = index + this.state.index;
+    //console.info('diff is: ', diff);
+    var x = 0;
+    var y = 0;
+    if (state.dir == 'x') x = index * state.width;
+    if (state.dir == 'y') y = index * state.height;
+    //console.info('x is: ', x);
+    this.refs.scrollView && this.refs.scrollView.scrollTo(y, x);
 
     // update scroll state
     this.setState({
       isScrolling: true,
-      autoplayEnd: false,
-    })
+      autoplayEnd: false
+    });
   },
 
   /**
